@@ -1,10 +1,10 @@
 // frontend/src/services/socket.js
 
 import { io } from 'socket.io-client';
-import { API_URL } from '../config'; // Import your backend URL
+import { SOCKET_URL } from '../config'; // Import your backend URL
 
 // Create a new socket connection to your backend server
-const socket = io(API_URL, {
+const socket = io(SOCKET_URL, {
   // We can add authentication options here later if needed
 });
 

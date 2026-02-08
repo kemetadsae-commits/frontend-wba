@@ -9,8 +9,7 @@ import {
 } from "@heroicons/react/24/outline";
 import axios from "axios";
 import TemplatePreview from "./TemplatePreview";
-
-const API_URL = process.env.REACT_APP_API_URL || "http://localhost:10000";
+import { API_URL } from "../config";
 
 const TemplateForm = ({
   initialData,
@@ -255,9 +254,8 @@ const TemplateForm = ({
           </button>
           <button
             type="button"
-            className={`btn btn-sm bg-[#0C8CE9] hover:bg-[#0A7AC9] text-white border-none px-6 ${
-              loading ? "loading" : ""
-            }`}
+            className={`btn btn-sm bg-[#0C8CE9] hover:bg-[#0A7AC9] text-white border-none px-6 ${loading ? "loading" : ""
+              }`}
             onClick={handleFormSubmit}
           >
             Submit

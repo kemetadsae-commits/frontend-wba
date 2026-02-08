@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { authFetch } from "../services/api";
+import { API_URL } from "../config";
 
 const StatCard = ({ title, value, className = "" }) => {
   return (
@@ -51,7 +52,7 @@ export default function CampaignAnalytics() {
         headers["Authorization"] = `Bearer ${token}`;
       }
       const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/analytics/${campaignId}/export`,
+        `${API_URL}/api/analytics/${campaignId}/export`,
         { headers }
       );
 
@@ -309,14 +310,13 @@ const DetailedAnalyticsTable = ({ campaignId }) => {
                   <td className="px-6 py-4">
                     <span
                       className={`px-2 py-1 rounded text-xs font-semibold
-                        ${
-                          item.status === "read"
-                            ? "bg-green-500/20 text-green-500"
-                            : item.status === "delivered"
+                        ${item.status === "read"
+                          ? "bg-green-500/20 text-green-500"
+                          : item.status === "delivered"
                             ? "bg-blue-500/20 text-blue-500"
                             : item.status === "failed"
-                            ? "bg-red-500/20 text-red-500"
-                            : "bg-gray-500/20 text-gray-500"
+                              ? "bg-red-500/20 text-red-500"
+                              : "bg-gray-500/20 text-gray-500"
                         }`}
                     >
                       {item.status}
@@ -362,11 +362,10 @@ const DetailedAnalyticsTable = ({ campaignId }) => {
             <button
               onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
               disabled={page === 1}
-              className={`px-3 py-1 rounded ${
-                page === 1
-                  ? "text-gray-600 cursor-not-allowed"
-                  : "text-emerald-500 hover:text-emerald-400"
-              }`}
+              className={`px-3 py-1 rounded ${page === 1
+                ? "text-gray-600 cursor-not-allowed"
+                : "text-emerald-500 hover:text-emerald-400"
+                }`}
             >
               PREVIOUS
             </button>
@@ -377,11 +376,10 @@ const DetailedAnalyticsTable = ({ campaignId }) => {
             <button
               onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
               disabled={page === totalPages || totalPages === 0}
-              className={`px-3 py-1 rounded ${
-                page === totalPages || totalPages === 0
-                  ? "text-gray-600 cursor-not-allowed"
-                  : "text-emerald-500 hover:text-emerald-400"
-              }`}
+              className={`px-3 py-1 rounded ${page === totalPages || totalPages === 0
+                ? "text-gray-600 cursor-not-allowed"
+                : "text-emerald-500 hover:text-emerald-400"
+                }`}
             >
               NEXT
             </button>
