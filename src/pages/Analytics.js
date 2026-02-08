@@ -36,7 +36,7 @@ const StatCard = ({ title, value, icon, colorClass }) => {
 // NEW HELPER FUNCTION for formatting the template name
 const formatTemplateName = (name) => {
   if (!name) return "";
-  // Replace underscores/hyphens with spaces and capitalize words
+  // Replace underscores/hyphens with spaces and cWhatsApp Manager words
   return name
     .replace(/[_-]/g, " ")
     .replace(/\b\w/g, (char) => char.toUpperCase());

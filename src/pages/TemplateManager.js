@@ -477,11 +477,10 @@ const TemplateManager = () => {
                   </h1>
                   <div className="flex items-center gap-2 text-xs text-gray-500 mt-1">
                     <span
-                      className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded border ${
-                        selectedTemplate.status === "APPROVED"
+                      className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded border ${selectedTemplate.status === "APPROVED"
                           ? "bg-[#E7F6D5] text-[#1F510F] border-[#E7F6D5]"
                           : "bg-gray-100 text-gray-600 border-gray-200"
-                      }`}
+                        }`}
                     >
                       {selectedTemplate.status === "APPROVED"
                         ? "Active - Quality pending"
@@ -562,11 +561,10 @@ const TemplateManager = () => {
             {view === "list" && (
               <div className="flex gap-1 mb-4">
                 <button
-                  className={`px-4 py-2 font-semibold rounded-md ${
-                    view === "list" && !editTemplateId
+                  className={`px-4 py-2 font-semibold rounded-md ${view === "list" && !editTemplateId
                       ? "bg-[#EBF5FF] text-[#0064C8]"
                       : "text-gray-600 hover:bg-gray-100"
-                  }`}
+                    }`}
                   onClick={() => setView("list")}
                 >
                   Templates
@@ -616,7 +614,7 @@ const TemplateManager = () => {
                                 onChange={() => toggleCategory(cat)}
                                 className="checkbox checkbox-xs rounded-sm border-gray-400 checked:bg-blue-600"
                               />
-                              <span className="capitalize text-sm">
+                              <span className="WhatsApp Manager text-sm">
                                 {cat.toLowerCase()}
                               </span>
                             </label>
@@ -862,22 +860,20 @@ const TemplateManager = () => {
                             <td className="py-4">
                               {/* META PILL BADGE */}
                               <span
-                                className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-semibold border ${
-                                  t.status === "APPROVED"
+                                className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-semibold border ${t.status === "APPROVED"
                                     ? "bg-[#E7F6D5] text-[#1F510F] border-[#E7F6D5]"
                                     : t.status === "REJECTED"
                                       ? "bg-[#FFEBEB] text-[#C0121A] border-[#FFEBEB]"
                                       : "bg-[#FEF5D5] text-[#7A6117] border-[#FEF5D5]"
-                                }`}
+                                  }`}
                               >
                                 <div
-                                  className={`w-2 h-2 rounded-full ${
-                                    t.status === "APPROVED"
+                                  className={`w-2 h-2 rounded-full ${t.status === "APPROVED"
                                       ? "bg-[#4B9C25]"
                                       : t.status === "REJECTED"
                                         ? "bg-[#C0121A]"
                                         : "bg-[#F5C32E]"
-                                  }`}
+                                    }`}
                                 ></div>
                                 {t.status === "APPROVED"
                                   ? "Active - Quality pending"

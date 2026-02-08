@@ -31,13 +31,13 @@ export default function PrivacyPolicy() {
                 rel="noopener noreferrer"
                 className="text-emerald-400 underline hover:text-emerald-300"
               >
-                The Capital Avenue Real Estate
+                The WhatsApp Manager Real Estate
               </a>
               .
             </p>
             <p className="mt-2 text-sm text-gray-400">
               Access is strictly restricted to authorized employees and agents
-              of The Capital Avenue. Unauthorized access or use by individuals
+              of The WhatsApp Manager. Unauthorized access or use by individuals
               outside the organization is prohibited.
             </p>
           </section>
@@ -97,7 +97,7 @@ export default function PrivacyPolicy() {
             <ul className="list-disc pl-5 mt-2 space-y-1">
               <li>
                 <strong>Client Data:</strong> All client information entered or
-                collected is owned by The Capital Avenue Real Estate and is used
+                collected is owned by The WhatsApp Manager Real Estate and is used
                 solely for business purposes.
               </li>
               <li>
@@ -124,31 +124,17 @@ export default function PrivacyPolicy() {
             <div className="mt-4 p-4 bg-gray-800 rounded-lg">
               <p className="mb-2">
                 <span className="text-gray-400">Organization:</span>{" "}
-                <a
-                  href="https://thecapitalavenue.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-white hover:text-emerald-400"
-                >
-                  The Capital Avenue Real Estate
-                </a>
+                <span className="text-white">
+                  WhatsApp Manager Real Estate
+                </span>
               </p>
               <p className="mb-2">
-                <span className="text-gray-400">Technical Contact 1:</span>{" "}
+                <span className="text-gray-400">Technical Contact:</span>{" "}
                 <a
-                  href="mailto:mhd.siraj@thecapitalavenue.com"
+                  href="mailto:support@example.com"
                   className="text-emerald-400 hover:underline"
                 >
-                  mhd.siraj@thecapitalavenue.com
-                </a>
-              </p>
-              <p>
-                <span className="text-gray-400">Technical Contact 2:</span>{" "}
-                <a
-                  href="mailto:muhammedsiraj274@gmail.com"
-                  className="text-emerald-400 hover:underline"
-                >
-                  muhammedsiraj274@gmail.com
+                  support@example.com
                 </a>
               </p>
             </div>

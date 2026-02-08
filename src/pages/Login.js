@@ -1,16 +1,14 @@
-// frontend/src/pages/Login.js
-
 import React, { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { API_URL } from "../config";
+import PageLayout from "../components/PageLayout"; // Import the layout for the background
+import { theme } from "../styles/theme";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [token, setToken] = useState(""); // State for the 6-digit 2FA code
-
-  // State to manage which step of the login we are on
   const [isTwoFactorStep, setIsTwoFactorStep] = useState(false);
 
   const navigate = useNavigate();
@@ -33,10 +31,8 @@ export default function Login() {
 
       if (data.success) {
         if (data.twoFactorRequired) {
-          // If 2FA is needed, move to the next step
           setIsTwoFactorStep(true);
         } else {
-          // If no 2FA, log in directly
           login(data.user, data.token);
           navigate("/");
         }
@@ -54,7 +50,6 @@ export default function Login() {
     if (!token) return alert("Please enter your 2FA code.");
 
     try {
-      // Call the new verification endpoint
       const response = await fetch(`${API_URL}/api/auth/2fa/verify`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -64,7 +59,6 @@ export default function Login() {
       const data = await response.json();
 
       if (data.success) {
-        // If verification is successful, complete the login
         login(data.user, data.token);
         navigate("/");
       } else {
@@ -76,98 +70,114 @@ export default function Login() {
     }
   };
 
-  const inputStyle =
-    "bg-[#2c3943] border border-gray-700 text-neutral-200 text-sm rounded-lg focus:ring-emerald-500 block w-full p-2.5";
-  const labelStyle = "block mb-2 text-sm font-medium text-gray-400";
-  const buttonStyle =
-    "w-full text-white bg-emerald-600 hover:bg-emerald-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center";
+  // Define input style to match theme if not imported
+  const inputStyle = theme.inputStyle ||
+    "w-full bg-white/5 border border-white/10 text-white placeholder-gray-500 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 backdrop-blur-sm transition-all duration-300";
 
   return (
-    <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-black min-h-screen w-full flex items-center justify-center">
-      <div className="w-full max-w-md bg-[#202d33] p-8 rounded-lg shadow-lg">
-        {isTwoFactorStep ? (
-          // --- 2FA VERIFICATION FORM ---
-          <>
-            <h2 className="text-2xl font-bold text-white mb-6 text-center">
-              Enter Verification Code
-            </h2>
-            <form
-              onSubmit={handleVerify2FASubmit}
-              className="flex flex-col gap-6"
-            >
-              <div>
-                <label htmlFor="token" className={labelStyle}>
-                  6-Digit Code
-                </label>
-                <input
-                  id="token"
-                  type="text"
-                  placeholder="123456"
-                  value={token}
-                  onChange={(e) => setToken(e.target.value)}
-                  className={inputStyle}
-                  required
-                />
-              </div>
-              <button type="submit" className={buttonStyle}>
-                Verify & Login
-              </button>
-            </form>
-          </>
-        ) : (
-          // --- STANDARD LOGIN FORM ---
-          <>
-            <h2 className="text-2xl font-bold text-white mb-6 text-center">
-              Sign In to Your Account
-            </h2>
-            <form
-              onSubmit={handlePasswordSubmit}
-              className="flex flex-col gap-6"
-            >
-              <div>
-                <label htmlFor="email" className={labelStyle}>
-                  Email Address
-                </label>
-                <input
-                  id="email"
-                  type="email"
-                  placeholder="you@example.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className={inputStyle}
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="password" className={labelStyle}>
-                  Password
-                </label>
-                <input
-                  id="password"
-                  type="password"
-                  placeholder="••••••••"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className={inputStyle}
-                  required
-                />
-              </div>
-              <button type="submit" className={buttonStyle}>
-                Sign In
-              </button>
-            </form>
-          </>
-        )}
+    <PageLayout>
+      <div className="flex min-h-screen items-center justify-center -mt-20"> {/* Negative margin to counteract PageLayout padding/nav if any */}
+        <div className="w-full max-w-md p-8 relative">
+          {/* Glass Card Background */}
+          <div className="absolute inset-0 bg-[#0a0a0a]/60 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl"></div>
 
-        <div className="mt-6 text-center border-t border-gray-700 pt-4">
-          <Link
-            to="/privacy-policy"
-            className="text-gray-400 hover:text-emerald-500 text-sm transition-colors"
-          >
-            Privacy Policy
-          </Link>
+          {/* Subtle Glow Behind Card */}
+          <div className="absolute -inset-0.5 rounded-2xl bg-gradient-to-br from-red-500/20 to-orange-500/20 opacity-50 blur-xl -z-10"></div>
+
+          <div className="relative z-10">
+            {isTwoFactorStep ? (
+              // --- 2FA VERIFICATION FORM ---
+              <>
+                <div className="text-center mb-8">
+                  <h2 className="text-3xl font-bold text-white mb-2 tracking-tight">
+                    Verify It's You
+                  </h2>
+                  <p className="text-gray-400 text-sm">
+                    Enter the code from your authenticator app.
+                  </p>
+                </div>
+
+                <form onSubmit={handleVerify2FASubmit} className="flex flex-col gap-6">
+                  <div>
+                    <label htmlFor="token" className="block mb-2 text-sm font-medium text-gray-300">
+                      6-Digit Code
+                    </label>
+                    <input
+                      id="token"
+                      type="text"
+                      placeholder="e.g. 123456"
+                      value={token}
+                      onChange={(e) => setToken(e.target.value)}
+                      className={inputStyle}
+                      required
+                      autoFocus
+                    />
+                  </div>
+                  <button type="submit" className={theme.primaryGradientBtn || "w-full text-white bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-500 hover:to-orange-500 font-bold rounded-lg text-sm px-5 py-3 text-center transition-all duration-300 shadow-lg shadow-red-500/20"}>
+                    Verify & Login
+                  </button>
+                </form>
+              </>
+            ) : (
+              // --- STANDARD LOGIN FORM ---
+              <>
+                <div className="text-center mb-8">
+                  <h2 className="text-4xl font-black text-white mb-2 tracking-tight">
+                    Welcome Back
+                  </h2>
+                  <p className="text-gray-400 text-sm">
+                    Sign in to manage your campaigns.
+                  </p>
+                </div>
+
+                <form onSubmit={handlePasswordSubmit} className="flex flex-col gap-5">
+                  <div>
+                    <label htmlFor="email" className="block mb-2 text-xs font-medium text-gray-400 uppercase tracking-wider">
+                      Email Address
+                    </label>
+                    <input
+                      id="email"
+                      type="email"
+                      placeholder="you@example.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className={inputStyle}
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="password" className="block mb-2 text-xs font-medium text-gray-400 uppercase tracking-wider">
+                      Password
+                    </label>
+                    <input
+                      id="password"
+                      type="password"
+                      placeholder="••••••••"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className={inputStyle}
+                      required
+                    />
+                  </div>
+
+                  <button type="submit" className={theme.primaryGradientBtn || "w-full text-white bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-500 hover:to-orange-500 font-bold rounded-lg text-sm px-5 py-3 text-center transition-all duration-300 shadow-lg shadow-red-500/20 mt-4"}>
+                    Sign In
+                  </button>
+                </form>
+              </>
+            )}
+
+            <div className="mt-8 text-center border-t border-white/5 pt-6">
+              <Link
+                to="/privacy-policy"
+                className="text-gray-500 hover:text-red-400 text-xs transition-colors duration-300"
+              >
+                Privacy Policy
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </PageLayout>
   );
 }

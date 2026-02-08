@@ -122,12 +122,12 @@ export default function Navbar() {
               {/* Logo + Navigation */}
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex shrink-0 items-center">
-                  <img
-                    alt="Logo"
-                    src="https://thecapitalavenue.com/wp-content/uploads/2025/09/Capital-Avenue-White.png"
-                    className="h-8 w-auto hover:opacity-90 transition-opacity cursor-pointer"
+                  <span
+                    className="text-white font-bold text-xl tracking-tight cursor-pointer hover:opacity-80 transition-opacity"
                     onClick={() => navigate("/")}
-                  />
+                  >
+                    WhatsApp Manager
+                  </span>
                 </div>
                 {user && (
                   <div className="hidden sm:ml-6 sm:block">
@@ -265,7 +265,7 @@ export default function Navbar() {
                         <span className="sr-only">Open user menu</span>
                         <img
                           alt="profile"
-                          src="https://thecapitalavenue.com/wp-content/uploads/2025/08/Group-3.svg"
+                          src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"
                           className="size-9 rounded-full bg-gray-100"
                         />
                       </Menu.Button>
